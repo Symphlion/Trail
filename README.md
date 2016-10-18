@@ -16,7 +16,7 @@ require '../vendor/autoload.php';
 
 And after that, you can start using it.
 
-```
+``` php
 
 use \Trail\Router;
 
