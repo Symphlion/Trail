@@ -314,7 +314,7 @@ class Route {
                 $cleansed = str_replace($identifier, '', $segment);
                 if (isset($arguments[$cleansed])) {
                     $link[] = $arguments[$cleansed];
-                } else {
+                }  else {
                     $link[] = (isset($arguments[$count]) ? $arguments[$count] : '');
                 }
                 $count++;
@@ -366,7 +366,10 @@ class Route {
      * @return  array
      */
     public function getArguments() {
-        return $this->arguments;
+        if( isset($this->arguments)) {
+            return $this->arguments;
+        }
+        return [];
     }
 
     /**
