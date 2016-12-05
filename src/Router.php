@@ -149,7 +149,7 @@ class Router {
 
         if ($this->hasMatched()) {
             if (is_callable($this->current->getCallback())) {
-                call_user_func_array($this->current->getCallback(), $this->current->getArguments());
+                return call_user_func_array($this->current->getCallback(), $this->current->getArguments());
             }
             return true;
         }

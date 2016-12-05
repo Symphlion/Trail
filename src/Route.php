@@ -75,6 +75,13 @@ class Route {
     private $name = null;
 
     /**
+     * @property the arguments array contains all the dynamic arguments given
+     * in the same order they appear in the uri
+     * @var array
+     */
+    private $arguments = [];
+
+    /**
      * The config array we initialized it with
      * @param array $config
      */
@@ -117,8 +124,8 @@ class Route {
         // first, remove it from the current collection ( if any )
         if ($this->collection !== null) {
             $current_collection = $router->getCollection($this->collection);
-            
-            if( $current_collection){
+
+            if ($current_collection) {
                 $current_collection->remove($this);
             }
         }
@@ -128,9 +135,9 @@ class Route {
         // se, the problem 
         if (!$router->hasCollection($name)) {
             $router->addCollection(new \Trail\Collection(['name' => $name]));
-        } 
-        
-        $router->getCollection( $name )->add($this);
+        }
+
+        $router->getCollection($name)->add($this);
         $this->collection = $name;
         return $this;
     }
@@ -153,7 +160,7 @@ class Route {
         try {
             $this->prepare();
             $matches = [];
-            
+
             if (preg_match_all($this->regex_uri, $uri, $matches)) {
                 return $this->handleMatchedRoute($uri);
             }
@@ -299,9 +306,9 @@ class Route {
      * @param   array|string $arguments
      * @return  string
      */
-    public function url( $arguments = [] ) {
-        
-        if(is_string($arguments)){
+    public function url($arguments = []) {
+
+        if (is_string($arguments)) {
             $arguments = [$arguments];
         }
         $identifier = ':';
@@ -314,7 +321,7 @@ class Route {
                 $cleansed = str_replace($identifier, '', $segment);
                 if (isset($arguments[$cleansed])) {
                     $link[] = $arguments[$cleansed];
-                }  else {
+                } else {
                     $link[] = (isset($arguments[$count]) ? $arguments[$count] : '');
                 }
                 $count++;
@@ -366,10 +373,7 @@ class Route {
      * @return  array
      */
     public function getArguments() {
-        if( isset($this->arguments)) {
-            return $this->arguments;
-        }
-        return [];
+        return $this->arguments;
     }
 
     /**
