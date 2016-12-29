@@ -260,7 +260,9 @@ class Route {
 
         $this->validateMethods($config[0]);
         $this->uri = $config[1];
-        $this->callback = $config[2];
+        if (isset($config[2])) {
+            $this->callback = $config[2];
+        }
         $this->parameters = (isset($config[3]) ? $config[3] : []);
         $this->collection = (isset($config[4]) ? $config[4] : 'default');
 
