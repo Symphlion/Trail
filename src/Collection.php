@@ -113,6 +113,9 @@ class Collection implements \ArrayAccess, \Countable, \Iterator {
         if( isset($config['target'])){
             $this->setTarget($config['target']);
         }
+        else if( isset($config['path'])){
+            $this->setTarget($config['path']);
+        }
         if( isset($config['prefix'])){
             $this->setPrefix( $config['prefix'] );
         }
