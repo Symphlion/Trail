@@ -372,7 +372,7 @@ class Router {
             $this->collections[$name] = new \Trail\Collection();
         }
 
-        $this->collections[$name]->initialize($config);
+        $this->collections[$name]->initialize($collection);
         $this->collections[$name]->setname($name);
 
         if ( $routes !== null ) {
